@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tải lên câu hỏi</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 16px;
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .btn {
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 10px 25px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .alert {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Tải lên file Excel chứa câu hỏi</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Chọn file Excel:</label>
+                <input type="file" class="form-control" name="file" id="file" accept=".xlsx" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Tải lên</button>
+        </form>
+
+        <!-- Button to return to the home page -->
+        <a href="{{ url_for('index') }}" class="btn btn-secondary btn-block mt-4">Trở về trang chủ</a>
+
+        {% if file_name %}
+        <div class="alert alert-success mt-4">
+            <strong>Thành công!</strong> File <strong>{{ file_name }}</strong> đã được tải lên.
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NTK.</p>
+    </footer>
+
+    <!-- Optional Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

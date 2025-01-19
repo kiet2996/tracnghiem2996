@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            font-size: 16px;
+            background-color: #f5f7fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .btn {
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 10px 25px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-info {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-info:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Chào mừng đến với Quiz</h2>
+
+        <!-- Time Limit Section -->
+        <div class="card">
+            <form action="{{ url_for('quiz') }}" method="GET">
+                <div class="form-group">
+                    <label for="time_limit">Chọn thời gian (giây):</label>
+                    <input type="range" id="time_limit" name="time_limit" class="form-control-range" min="0" max="999999999" step="10" value="60" oninput="this.nextElementSibling.value = this.value">
+                    <output>60</output> giây
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Bắt đầu làm bài</button>
+            </form>
+        </div>
+
+        <!-- Upload and Delete Question Section -->
+        <div class="text-center">
+            <a href="{{ url_for('upload_excel') }}" class="btn btn-info btn-lg">Tải lên câu hỏi từ Excel</a>
+            <a href="{{ url_for('delete_all_questions') }}" class="btn btn-danger btn-lg">Xóa tất cả câu hỏi</a>
+        </div>
+
+        <!-- Display the uploaded file name -->
+        {% if file_name %}
+        <div class="alert alert-info mt-3">
+            <strong>File đã được tải lên thành công:</strong> {{ file_name }}
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 NTK.</p>
+    </footer>
+
+    <!-- Optional Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
